@@ -1,0 +1,6 @@
+---
+triggers:
+    cron: @daily
+
+script:
+    - ./update.sh
