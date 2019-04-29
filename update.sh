@@ -121,14 +121,17 @@ if [ "$arch" = "$hostArch" ]; then
 		serial="$(awk -F '=' '$1 == "SERIAL" { print $2; exit }' "$v/build-info.txt")"
 		if [ "$serial" ]; then
 			( set -x; docker tag "$repo:$v" "$repo:$v-$serial" )
+			( set -x; docker push "$repo:$v-$serial" )
 		fi
 		if [ -s "$v/alias" ]; then
 			for a in $(< "$v/alias"); do
 				( set -x; docker tag "$repo:$v" "$repo:$a" )
+				( set -x; docker push "$repo:$a" )
 			done
 		fi
 		if [ "$v" = "$latest" ]; then
 			( set -x; docker tag "$repo:$v" "$repo:latest" )
+			( set -x; docker push "$repo:latest" )
 		fi
 	done
 fi
