@@ -18,7 +18,7 @@ if [ -z "$gpgFingerprint" ]; then
 else
 	export GNUPGHOME="$(mktemp -d)"
 	trap "rm -r '$GNUPGHOME'" EXIT
-	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$gpgFingerprint"
+	gpg --import D2EB44626FDDC30B513D5BB71A5D6C4C7DB87C81.pub
 fi
 
 hostArch="$(dpkg --print-architecture)"
